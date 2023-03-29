@@ -8,12 +8,12 @@ newBranchDevelop(){
   git fetch
   git checkout develop
   git pull
-  git checkout -b "feature-CMM-$1-$2"
+  git checkout -b "feature-SD-$1-$2"
   git branch
   git stash pop
   git add .
-  git commit -m "Creación de rama feature-CMM-$1-$2"
-  git push --set-upstream origin "feature-CMM-$1-$2"
+  git commit -m "Creación de rama feature-SD-$1-$2"
+  git push --set-upstream origin "feature-SD-$1-$2"
   exit 0
 }
 function push {
@@ -55,7 +55,7 @@ function setMergeBranch {
 
 function createBranchFromActual {
     branch=$(git symbolic-ref --short HEAD)
-    newBranch="feature-CMM-$1-$2"
+    newBranch="feature-SD-$1-$2"
     git add -A
     git commit -m "UPDATE ${newBranch}"
     git checkout -b "${newBranch}"
