@@ -5,6 +5,9 @@ const userShema = Schema({
         type:String,
         required:[true,"el nombre es obligatorio"]
     },
+    uuid:{
+        type:Number
+    },
     email:{
         type:String,
         required:[true,"el correo es obligatorio"],
@@ -30,9 +33,13 @@ const userShema = Schema({
         type:Boolean,
         default:false
     },
+    products:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "product"
+    }]
 })
 usuarioShema.methods.toJSON = function(){
   const {__v,password, ...user} = this.toObject(); 
-  return usuario; 
+  return user; 
 }
-module.exports=model("User",userShema);
+module.exports=model("user",userShema);
