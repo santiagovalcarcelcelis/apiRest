@@ -1,28 +1,28 @@
 const {Schema,model} = require("mongoose");
 
-const usuarioShema = Schema({
-    nombre:{
+const userShema = Schema({
+    name:{
         type:String,
         required:[true,"el nombre es obligatorio"]
     },
-    correo:{
+    email:{
         type:String,
         required:[true,"el correo es obligatorio"],
         unique:true
     },
-    contraseña:{
+    password:{
         type:String,
         required:[true,"la contraseña es obligatorio"],
     },
-    img:{
+    profile:{
         type:String,
     },
-    rol:{
+    role:{
         type:String,
         required:true,
         emun:["ADMIN_ROLE","USER_ROLE"]
     },
-    estado:{
+    status:{
         type:Boolean,
         default:true
     },
@@ -32,7 +32,7 @@ const usuarioShema = Schema({
     },
 })
 usuarioShema.methods.toJSON = function(){
-  const {__v,contraseña, ...usuario} = this.toObject(); 
+  const {__v,password, ...user} = this.toObject(); 
   return usuario; 
 }
-module.exports=model("Usuario",usuarioShema);
+module.exports=model("User",userShema);
