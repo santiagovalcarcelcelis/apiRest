@@ -1,7 +1,7 @@
 const {Schema,model} = require("mongoose");
 
 
-const productShema = Schema({
+const ProductsShema = Schema({
 
     id:{
         type:Number
@@ -25,8 +25,10 @@ const productShema = Schema({
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     }
 })
 
-  module.exports=model("product",productShema);
+  module.exports=model("Product",ProductsShema);
+  const Product = mongoose.model("Product", ProductsShema);
+module.exports={Product}
