@@ -1,12 +1,15 @@
-const {Schema,model} = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const model = mongoose.model
 
-const userShema = Schema({
+
+const UsersShema = Schema({
     name:{
         type:String,
         required:[true,"el nombre es obligatorio"]
     },
     uuid:{
-        type:Number
+        type:String
     },
     email:{
         type:String,
@@ -35,11 +38,11 @@ const userShema = Schema({
     },
     products:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "product"
+        ref: "Product"
     }]
 })
-usuarioShema.methods.toJSON = function(){
+UsersShema.methods.toJSON = function(){
   const {__v,password, ...user} = this.toObject(); 
   return user; 
 }
-module.exports=model("user",userShema);
+module.exports=model("User",UsersShema);

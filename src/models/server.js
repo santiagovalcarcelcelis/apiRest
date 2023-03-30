@@ -14,7 +14,7 @@ class Server{
     // Middlewares
         // this.middlewares();
     // rutas de mi aplicacion
-        // this.routes();
+        this.routes();
     }
     async conectarDB(){
         await dbConection();
@@ -27,9 +27,9 @@ class Server{
     // // directorio publico
     //     this.app.use(express.static("public"));
     // }
-    // routes(){
-    //     this.app.use("/api/usuarios", require("../routes/usuarios"))
-    // }
+    routes(){
+        this.app.use("/api/usuarios", require("../routes/user.route"))
+    }
     listen(){
         this.app.listen(this.port, () => {
             console.log(`servidor corriendo en el puerto`,this.port)

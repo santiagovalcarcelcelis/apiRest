@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev":"nodemon src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "options":"bash options.sh"
+    "options": "bash options.sh"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,8 @@
     "express": "^4.18.2",
     "express-validator": "^6.15.0",
     "hbs": "^4.2.0",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
