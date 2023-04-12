@@ -1,6 +1,7 @@
 const { response, request } = require('express')
 const { v4 } = require('uuid')
 const Product = require('../models/product.model')
+const User = require('../models/user.model')
 
 const ProductsGet = async (req = request, res = response) => {
   const { limite = 5, desde = 0 } = req.query
@@ -26,11 +27,16 @@ const ProductsGetId = async (req, res) => {
 const ProductsPost = async (req, res = response) => {
   const { name, description, picture,user } = req.body
   let uuid = v4()
+  let products=[]
   const product = new Product({ name, description,picture,uuid,user })
   // guardar en base de datos
-  await product.save()
+  const productSave = await product.save()
+
+  const userUpdate = await User.findById({ _id: user })
+  userUpdate.products.push(productSave._id)
+  const saveUser = await User.findOneAndUpdate({ _id: user }, userUpdate)
   res.json({
-    product,
+    productSave,
   })
 }
 const ProductsPut = async (req, res = response) => {
