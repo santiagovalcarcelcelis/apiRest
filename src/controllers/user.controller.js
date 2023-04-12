@@ -18,11 +18,12 @@ const UsersGet = async (req = request, res = response) => {
 }
 const UsersGetId = async (req, res) => {
   const id = req.params.id
-  const user = await User.findById(id)
+  const user = await User.findOne({_id:id}).populate('products')
   res.json({
-    id,
-    user,
+    user
   })
+
+ 
 }
 const UsersPost = async (req, res = response) => {
   const { name, email, password, role } = req.body
