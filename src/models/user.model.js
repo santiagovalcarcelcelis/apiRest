@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const model = mongoose.model
 
-const UsersShema = new Schema(
+const UsersShema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -38,7 +38,7 @@ const UsersShema = new Schema(
     },
     products: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Product',
       },
     ],
@@ -51,4 +51,4 @@ UsersShema.methods.toJSON = function () {
   const { __v, password, ...user } = this.toObject()
   return user
 }
-module.exports = model('User', UsersShema)
+module.exports = mongoose.model('User', UsersShema)

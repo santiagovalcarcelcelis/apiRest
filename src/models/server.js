@@ -7,7 +7,6 @@ class Server {
     this.port = process.env.PORT
     this.app.use(express.json())
     this.app.use(cors())
-    this.usuariosPath = '/api/usuarios'
     // conectar a base de datos
     this.conectarDB()
 
@@ -28,7 +27,8 @@ class Server {
   //     this.app.use(express.static("public"));
   // }
   routes() {
-    this.app.use('/api/users', require('../routes/user.route'))
+    this.app.use('/api/users', require('../routes/user.route')),
+    this.app.use('/api/products', require('../routes/product.route'))
   }
   listen() {
     this.app.listen(this.port, () => {
