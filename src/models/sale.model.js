@@ -1,6 +1,9 @@
-const {Schema,model} = require("mongoose");
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const model = mongoose.model
 
-const SalesShema = Schema({
+const SalesShema = new mongoose.Schema(
+{
     id_customer:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Customer"
@@ -14,6 +17,4 @@ const SalesShema = Schema({
     }
 })
 
-module.exports=model("Sale",SaleShema);
-const Sale = mongoose.model("Sale", SalesShema);
-module.exports={Sale}
+module.exports= mongoose.model("sale",SalesShema);

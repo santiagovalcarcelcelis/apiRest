@@ -1,6 +1,7 @@
-const { Schema, model } = require('mongoose')
-
-const customerShema = Schema({
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const model = mongoose.model
+const customerShema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'El nombre es obligatorio'],
@@ -24,13 +25,13 @@ const customerShema = Schema({
   picture: {
     type: String,
   },
-  rol: {
+  role: {
     type: String,
     required: true,
     emun: ['USER_ROLE'],
   },
   uuid: {
-    type: Number,
+    type: String,
   },
   status: {
     type: Boolean,
@@ -41,10 +42,11 @@ const customerShema = Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'sale',
     },
-  ],
-})
+  ],deletedAt: { type: Date },
+},
+{ timestamps: {} })
 customerShema.methods.toJSON = function () {
   const { __v, password, ...customer } = this.toObject()
   return customer
 }
-module.exports = model('customer', customerShema)
+module.exports = mongoose.model('customer', customerShema)
