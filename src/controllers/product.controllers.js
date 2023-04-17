@@ -1,68 +1,43 @@
-const { response, request } = require('express')
-const { v4 } = require('uuid')
-const Product = require('../models/product.model')
-const User = require('../models/user.model')
+const { getIdProductService, createProductService, updateProductService, deleteProductService, getAllProductService } = require('../services/product.service')
 
-const ProductsGet = async (req = request, res = response) => {
-  const { limite = 5, desde = 0 } = req.query
-  const query = { deletedAt: undefined }
-
-  const [total, products] = await Promise.all([
-    Product.countDocuments(query),
-    Product.find(query).skip(Number(desde)).limit(Number(limite)),
-  ])
+const getAllProductController = async (req = request, res = response) => {
+  const geAllProduct = await getAllProductService(req)
+  const {total,products} = geAllProduct
   res.json({
     total,
     products,
   })
 }
-const ProductsGetId = async (req, res) => {
-  const id = req.params.id
-  const product = await Product.findById(id).populate('user')
+const getIdProductController = async (req, res) => {
+  const getIdProduct = await getIdProductService(req)
+  const {id,product} = getIdProduct
   res.json({
     id,
     product,
   })
 }
-const ProductsPost = async (req, res = response) => {
-  const { name, description, picture,user } = req.body
-  let uuid = v4()
-  let products=[]
-  const product = new Product({ name, description,picture,uuid,user })
-  // guardar en base de datos
-  const productSave = await product.save()
-
-  const userUpdate = await User.findById({ _id: user })
-  userUpdate.products.push(productSave._id)
-  const saveUser = await User.findOneAndUpdate({ _id: user }, userUpdate)
+const createProductController = async (req, res = response) => {
+  const createProduct = await createProductService(req)
   res.json({
-    productSave,
+    createProduct
   })
 }
-const ProductsPut = async (req, res = response) => {
-  const id = req.params.id
-  const { password, google, ...data } = req.body
-  const product = await Product.findOneAndUpdate({ _id: id }, data)
+const updateProductController = async (req, res = response) => {
+  const updateProduct = await updateProductService(req)
+  const {id,product} = updateProduct
   res.json({
     id,
     product,
   })
 }
-const ProductsDelete = async (req, res = response) => {
-  const { id } = req.params
-  // fisicamente lo borramos
-  // const usuario = await Usuario.findByIdAndDelete(id)
-  const product = await Product.findByIdAndUpdate(
-    { _id: id },
-    { deletedAt: new Date() }
-  )
-
-  res.json(product)
+const deleteProductController = async (req, res = response) => {
+  const deleteProduct = await deleteProductService(req)
+  res.json(deleteProduct)
 }
 module.exports = {
-  ProductsPost,
-  ProductsGet,
-  ProductsGetId,
-  ProductsPut,
-  ProductsDelete
+  createProductController,
+  getAllProductController,
+  getIdProductController,
+  updateProductController,
+  deleteProductController
 }

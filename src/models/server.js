@@ -29,6 +29,8 @@ class Server {
   routes() {
     this.app.use('/api/users', require('../routes/user.route')),
     this.app.use('/api/products', require('../routes/product.route'))
+    this.app.use('/api/customers', require('../routes/customer.route'))
+    this.app.use('/api/sales', require('../routes/sale.route'))
   }
   listen() {
     this.app.listen(this.port, () => {
