@@ -16,10 +16,10 @@ const SalesShema = new mongoose.Schema({
   total_vat:{
     type:Number
   },
-  detail: {
+  detail: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Detail',
-  },
+  }],
 })
 
 module.exports = mongoose.model('sale', SalesShema)

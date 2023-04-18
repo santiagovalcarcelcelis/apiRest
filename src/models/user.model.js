@@ -40,15 +40,6 @@ const UsersShema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        id_product:{
-          type:Number
-        },
-        price:{
-          type:Number
-        },
-        amount:{
-          type:Number
-        }
       },
     ],
     deletedAt: { type: Date },

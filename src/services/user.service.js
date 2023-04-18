@@ -2,6 +2,8 @@ const { request } = require('express')
 const { v4 } = require('uuid')
 const User = require('../models/user.model')
 const bcryptjs = require('bcryptjs')
+const { createProductController } = require('../controllers/product.controllers')
+const { createProductService } = require('./product.service')
 
 const getAllUserService = async (req = request) => {
   const { limite = 5, desde = 0 } = req.query
@@ -50,6 +52,15 @@ const deleteUserService = async (req) => {
   )
   return user
 }
+const updateUserProduct = async (req = request,res = response) =>{
+  let products = []
+  const productSave = await createProductService(req)
+  const {user} = await createProductController(res = response)
+  const userUpdate = await User.findById({ _id: user })
+  userUpdate.products.push(productSave._id)
+  const saveUser = await User.findOneAndUpdate({ _id: user }, userUpdate)
+}
+
 
 module.exports = {
   createUserService,
@@ -57,4 +68,5 @@ module.exports = {
   getIdUserService,
   updateUserService,
   deleteUserService,
+  updateUserProduct
 }
