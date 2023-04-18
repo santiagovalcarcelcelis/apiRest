@@ -1,13 +1,13 @@
-const { createSaleService } = require("../services/sale.service")
+const { createDetailSaleService } = require('../services/detail_sale.service')
 
 
 const createSaleController = async (req, res = response) => {
-    const createSale = await createSaleService(req)
-    res.json({
-      createSale
-    })
-  }
+  const createDetailSale = await createDetailSaleService(req)
+  res.json({
+    createDetailSale,
+  })
+}
 
 module.exports = {
-    createSaleController
+  createSaleController,
 }

@@ -10,11 +10,11 @@ const getAllCustomerService = async (req = request) => {
     Customer.countDocuments(query),
     Customer.find(query).skip(Number(desde)).limit(Number(limite)),
   ])
- return {total,customer}
+  return { total, customer }
 }
 const getIdCustomerService = async (req) => {
   const id = req.params.id
-  const customer = await Customer.findOne({_id:id}).populate('sales')
+  const customer = await Customer.findOne({ _id: id }).populate('sales')
   return customer
 }
 const updateCustomerService = async (req) => {
@@ -26,7 +26,7 @@ const updateCustomerService = async (req) => {
     data.password = bcryptjs.hashSync(password, salt)
   }
   const customer = await Customer.findOneAndUpdate({ _id: id }, data)
-  return {id,customer}
+  return { id, customer }
 }
 const createCustomerService = async (req) => {
   const { name, email, password, role } = req.body
@@ -36,23 +36,23 @@ const createCustomerService = async (req) => {
   const salt = bcryptjs.genSaltSync()
   customer.password = bcryptjs.hashSync(password, salt)
   // guardar en base de datos
-  const customerSave= await customer.save()
+  const customerSave = await customer.save()
   return customerSave
 }
 const deleteCustomerService = async (req) => {
   const { id } = req.params
   // fisicamente lo borramos
   // const usuario = await Usuario.findByIdAndDelete(id)
-  const customer = await  Customer.findByIdAndUpdate(
+  const customer = await Customer.findByIdAndUpdate(
     { _id: id },
     { deletedAt: new Date() }
   )
-    return customer
+  return customer
 }
-module.exports={
-    createCustomerService,
-    getAllCustomerService,
-    updateCustomerService,
-    deleteCustomerService,
-    getIdCustomerService
+module.exports = {
+  createCustomerService,
+  getAllCustomerService,
+  updateCustomerService,
+  deleteCustomerService,
+  getIdCustomerService,
 }

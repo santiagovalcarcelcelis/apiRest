@@ -10,11 +10,11 @@ const getAllUserService = async (req = request) => {
     User.countDocuments(query),
     User.find(query).skip(Number(desde)).limit(Number(limite)),
   ])
- return {total,users}
+  return { total, users }
 }
 const getIdUserService = async (req, res) => {
   const id = req.params.id
-  const user = await User.findOne({_id:id}).populate('products')
+  const user = await User.findOne({ _id: id }).populate('products')
   return user
 }
 const createUserService = async (req) => {
@@ -26,9 +26,8 @@ const createUserService = async (req) => {
   const salt = bcryptjs.genSaltSync()
   user.password = bcryptjs.hashSync(password, salt)
   // guardar en base de datos
-  const userSave= await user.save()
+  const userSave = await user.save()
   return userSave
-  
 }
 const updateUserService = async (req) => {
   const id = req.params.id
@@ -39,7 +38,7 @@ const updateUserService = async (req) => {
     data.password = bcryptjs.hashSync(password, salt)
   }
   const user = await User.findOneAndUpdate({ _id: id }, data)
-  return {id,user}
+  return { id, user }
 }
 const deleteUserService = async (req) => {
   const { id } = req.params
@@ -49,7 +48,7 @@ const deleteUserService = async (req) => {
     { _id: id },
     { deletedAt: new Date() }
   )
-    return user
+  return user
 }
 
 module.exports = {
@@ -57,6 +56,5 @@ module.exports = {
   getAllUserService,
   getIdUserService,
   updateUserService,
-  deleteUserService
+  deleteUserService,
 }
-
