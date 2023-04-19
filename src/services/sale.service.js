@@ -1,6 +1,5 @@
 const { request } = require('express')
 const Sale = require('../models/sale.model')
-const Customer = require('../models/customer.model')
 
 const createSaleService = async (req) => {
   const { id_customer, total, total_vat } = req.body
@@ -9,7 +8,6 @@ const createSaleService = async (req) => {
   const saleSave = await sale.save()
   return saleSave
 }
-
 module.exports = {
   createSaleService,
 }
