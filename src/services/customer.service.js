@@ -1,4 +1,4 @@
-const { request } = require('express')
+const { request,response } = require('express')
 const { v4 } = require('uuid')
 const Customer = require('../models/customer.model')
 const bcryptjs = require('bcryptjs')
@@ -39,6 +39,16 @@ const createCustomerService = async (req) => {
   const customerSave = await customer.save()
   return customerSave
 }
+const updateCustomerSale = async (sale) => {
+  const {id_customer} = sale
+  let sales = []
+  const customerUpdate = await Customer.findById({ _id: id_customer })
+  customerUpdate.sales.push(sale._id)
+  sale = await Customer.findOneAndUpdate(
+    { _id: id_customer },
+    customerUpdate
+  )
+}
 const deleteCustomerService = async (req) => {
   const { id } = req.params
   // fisicamente lo borramos
@@ -49,10 +59,12 @@ const deleteCustomerService = async (req) => {
   )
   return customer
 }
+
 module.exports = {
   createCustomerService,
   getAllCustomerService,
   updateCustomerService,
   deleteCustomerService,
   getIdCustomerService,
+  updateCustomerSale,
 }
