@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const model = mongoose.model
 
-const DetailsSaleShema = Schema({
+const detailsSaleShema = Schema({
   id_product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'product',
@@ -22,5 +22,5 @@ const DetailsSaleShema = Schema({
   },
 })
 
-module.exports = mongoose.model('Detail', DetailsSaleShema)
+module.exports = mongoose.model('DetailSale',detailsSaleShema)
 
