@@ -16,9 +16,9 @@ const SalesShema = new mongoose.Schema({
   total_vat:{
     type:Number
   },
-  detail: [{
+  detailSale: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Detail',
+    ref: 'DetailSale',
   }],
 })
 
