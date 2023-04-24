@@ -5,6 +5,8 @@ class Server {
   constructor() {
     this.app = express()
     this.port = process.env.PORT
+    this.authPath = "/api/auth"
+    this.authPathCustomer = "/api/authCustomer"
     this.app.use(express.json())
     this.app.use(cors())
     // conectar a base de datos
@@ -28,9 +30,11 @@ class Server {
   // }
   routes() {
     this.app.use('/api/users', require('../routes/user.route')),
-    this.app.use('/api/products', require('../routes/product.route'))
-    this.app.use('/api/customers', require('../routes/customer.route'))
-    this.app.use('/api/sales', require('../routes/sale.route'))
+    this.app.use(this.authPath, require('../routes/auth.route')),
+    this.app.use(this.authPathCustomer, require('../routes/authCustomer.route')),
+    this.app.use('/api/products', require('../routes/product.route')),
+    this.app.use('/api/customers', require('../routes/customer.route')),
+    this.app.use('/api/sales', require('../routes/sale.route')),
     this.app.use('/api/detailsales', require('../routes/detail_sale.route'))
   }
   listen() {

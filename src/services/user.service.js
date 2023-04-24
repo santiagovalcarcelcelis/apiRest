@@ -21,7 +21,6 @@ const createUserService = async (req) => {
   const { name, email, password, role } = req.body
   let uuid = v4()
   const user = new User({ name, email, role, password, uuid })
-
   // encriptar la contraseña
   const salt = bcryptjs.genSaltSync()
   user.password = bcryptjs.hashSync(password, salt)
