@@ -1,7 +1,8 @@
-const { request } = require('express')
+const { request,response} = require('express')
 const { v4 } = require('uuid')
 const User = require('../models/user.model')
 const bcryptjs = require('bcryptjs')
+
 
 const getAllUserService = async (req = request) => {
   const { limite = 5, desde = 0 } = req.query
@@ -17,8 +18,16 @@ const getIdUserService = async (req, res) => {
   const user = await User.findOne({ _id: id }).populate('products')
   return user
 }
-const createUserService = async (req) => {
+const createUserService = async (req,res= response) => {
   const { name, email, password, role } = req.body
+  //verificar si el correo existe
+  const existsEmail =  await User.findOne({email:email})
+ 
+  if (existsEmail) {
+    return res.status(400).json({
+      msg:"Este email ya esta registrado"
+    });
+  }
   let uuid = v4()
   const user = new User({ name, email, role, password, uuid })
   // encriptar la contraseña
