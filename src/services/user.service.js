@@ -19,6 +19,7 @@ const getIdUserService = async (req, res) => {
 }
 const createUserService = async (req) => {
   const { name, email, password, role } = req.body
+  //verificar si el correo existe
   let uuid = v4()
   const user = new User({ name, email, role, password, uuid })
   // encriptar la contraseña
