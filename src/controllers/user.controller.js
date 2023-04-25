@@ -21,7 +21,7 @@ const getIdUserController = async (req, res = response) => {
   })
 }
 const createUserController = async (req, res = response) => {
-  const createUser = await createUserService(req)
+  const createUser = await createUserService(req,res)
   res.json({
     createUser,
   })
