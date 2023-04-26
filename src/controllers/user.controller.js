@@ -36,8 +36,11 @@ const updateUserController = async (req, res = response) => {
 }
 const deleteUserController = async (req, res = response) => {
   const deleteUser = await deleteUserService(req)
-  const user = deleteUser
-  res.json(user)
+  const {user,userAuthenticated} = deleteUser
+  res.json({
+    user,
+    userAuthenticated
+  })
 }
 
 module.exports = {
