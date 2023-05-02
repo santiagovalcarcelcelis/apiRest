@@ -1,30 +1,30 @@
 const { response } = require('express')
 const jwt = require('jsonwebtoken')
-const User = require('../models/user.model')
+const Customer = require('../models/customer.model')
 
-const validateJwt = async (req, res = response, next) => {
-  const token = req.header('x-token')
+const validateCustomerJwt = async (req, res = response, next) => {
+  const token = req.header('y-token')
   if (!token) {
     return res.status(401).json({
       msg: 'No hay token en la peticion',
     })
   }
   try {
-    const {_id} = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-    const user = await User.findById(_id)
-    console.log(user);
-    if (!user) {
+    const { _id } = jwt.verify(token, process.env.SECRETORPRIVATEKEYCUSTOMER)
+    const customer = await Customer.findById(_id)
+    console.log(customer)
+    if (!customer) {
       return res.status(401).json({
         msg: 'Token no valido - usuario no existe en DB',
       })
     }
-    if (user.deletedAt) {
-      return  res.status(401).json({
+    if (customer.deletedAt) {
+      return res.status(401).json({
         msg: 'Token no valido - usuario barrado',
       })
     }
 
-    req.user = user
+    req.customer = customer
     next()
   } catch (error) {
     console.log(error)
@@ -37,5 +37,5 @@ const validateJwt = async (req, res = response, next) => {
 }
 
 module.exports = {
-  validateJwt,
+  validateCustomerJwt,
 }

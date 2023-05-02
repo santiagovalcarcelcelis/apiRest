@@ -19,7 +19,7 @@ const getIdProductController = async (req, res) => {
 }
 const createProductController = async (req, res = response) => {
   const createProduct = await createProductService(req)
-  updateUserProduct(createProduct)
+  // updateUserProduct(createProduct,req)
   res.json({
     createProduct
   })

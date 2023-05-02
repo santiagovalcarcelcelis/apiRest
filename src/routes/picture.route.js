@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const { createSaleController } = require('../controllers/sale.controllers')
+const { pictureService } = require('../services/picture')
+
 const router = Router()
-const { validateCustomerJwt } = require('../middlewares/validateCustomer-jwt')
-router.post('/', [validateCustomerJwt], createSaleController)
+router.post('/',pictureService)
 // router.get('/', getAllProductController)
 // router.get('/:id', getIdProductController)
 // router.put('/:id', updateProductController)

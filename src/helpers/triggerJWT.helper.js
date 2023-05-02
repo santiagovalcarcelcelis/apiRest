@@ -5,6 +5,7 @@ const triggerJWT = (_id = '') => {
     const payload = { _id }
     jwt.sign(
       payload,
+      process.env.SECRETORPRIVATEKEYCUSTOMER,
       process.env.SECRETORPRIVATEKEY,
       {
         expiresIn: '4h',

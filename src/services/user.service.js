@@ -57,13 +57,14 @@ const deleteUserService = async (req) => {
   const userAuthenticated = req.user
   return {user,userAuthenticated}
 }
-const updateUserProduct = async (product) =>{
-  const {user} = product
-  console.log(user,"holaaaa");
+const updateUserProduct = async (product,req) =>{
+  const userAuthenticated = req.user
+  const {_id} = userAuthenticated 
+  console.log(_id);
   let products = []
-  const userUpdate = await User.findById({ _id: user })
+  const userUpdate = await User.findById({ _id })
   userUpdate.products.push(product._id)
-  product = await User.findOneAndUpdate({ _id: user }, userUpdate)
+  product = await User.findOneAndUpdate({ _id }, userUpdate)
 }
 
 

@@ -9,7 +9,7 @@ const { updateCustomerSale } = require('../services/customer.service')
 const createSaleController = async (req = request, res = response) => {
   const createDetailSale = await createSaleService(req)
   const idsDetailSale = await createDetailSaleService(req,createDetailSale)
-  await updateCustomerSale(createDetailSale)
+  await updateCustomerSale(createDetailSale,req)
   const sale = await updateSaleWithDetail(createDetailSale,idsDetailSale)
   res.json({
     sale

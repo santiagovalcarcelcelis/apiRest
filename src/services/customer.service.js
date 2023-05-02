@@ -39,13 +39,15 @@ const createCustomerService = async (req) => {
   const customerSave = await customer.save()
   return customerSave
 }
-const updateCustomerSale = async (sale) => {
-  const {id_customer} = sale
+const updateCustomerSale = async (sale,req) => {
+  const customerAuthenticated = req.customer
+  const {_id} = customerAuthenticated
+  console.log(_id,"ggg");
   let sales = []
-  const customerUpdate = await Customer.findById({ _id: id_customer })
+  const customerUpdate = await Customer.findById({ _id})
   customerUpdate.sales.push(sale._id)
   sale = await Customer.findOneAndUpdate(
-    { _id: id_customer },
+    { _id },
     customerUpdate
   )
 }
