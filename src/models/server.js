@@ -16,12 +16,11 @@ class Server {
     // Middlewares
     //fileupload - carga de archivos
     this.app.use(
-      fileUpload(
-        fileUpload({
-          useTempFiles: true,
-          tempFileDir: '/tmp/',
-        })
-      )
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+        createParentPath: true,
+      })
     )
     // this.middlewares();
     // rutas de mi aplicacion

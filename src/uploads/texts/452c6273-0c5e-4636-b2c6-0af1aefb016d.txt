@@ -1,0 +1,36 @@
+1)este comando sirve para inicializar el repositorio en local
+git init
+2)verificar si hay cambios en el proyecto
+git status
+3)agregar cambios para subir
+git add -A
+4)agregar un comentario a los cambios que se realizaron
+git commit -m "un comenatario"
+5)descargar cambios del repositorio
+git pull
+6)subir los cambios al repositorio
+git push
+¿como clonar un repositorio?
+ir a github bucar el repositorio e ir al boton code
+copiar la url
+ir a una carpeta donde voy a dejar el proyecto
+abrir gitbash en esa carpeta
+colocar el comando git clone y la url que copio
+7)git checkout -b nombre de la rama
+crear una nueva rama.
+8)git checkout nombre de la rama
+ingresar a una rama
+9)git checkout -- . 
+descartar cambios hasta los ultimos cambios realizados
+10)git branch
+verificar que ramas tengo
+
+funciones:
+
+En javascritp hay 3 formas de crear funciones.
+1)la primera forma es atraves de las funciones declaradas
+estas funciones se componen de 3 elementos la palabra Funtion, el identificador o nombre de la funcion y parametros
+
+2)podemod crear una expresion funcional, que consiste en asociar una funcion a una variable,oueden tener nombre o ser anonimas
+
+3)podemos crear una version aun mas acortada de una funcion anonima a traves de las funciones flecha, no disponen de contexto propio de this y disponen de retorno implicito, delimitadores opcionales y no se alzan.   

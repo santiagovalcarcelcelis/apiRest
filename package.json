@@ -23,6 +23,7 @@
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
+    "uui": "^1.0.7",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -20,7 +20,7 @@ const UsersShema = new mongoose.Schema(
       type: String,
       required: [true, 'la contraseña es obligatorio'],
     },
-    profile: {
+    img: {
       type: String,
     },
     role: {

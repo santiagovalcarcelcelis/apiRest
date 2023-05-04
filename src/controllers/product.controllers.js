@@ -1,7 +1,7 @@
 const { getIdProductService, createProductService, updateProductService, deleteProductService, getAllProductService } = require('../services/product.service')
 const { updateUserProduct } = require('../services/user.service')
 
-const getAllProductController = async (res = response) => {
+const getAllProductController = async (req, res) => {
   const geAllProduct = await getAllProductService(req)
   const {total,products} = geAllProduct
   res.json({

@@ -22,7 +22,7 @@ const customerShema = new mongoose.Schema({
     required: [true, 'el correo es obligatorio'],
     unique: true,
   },
-  picture: {
+  img: {
     type: String,
   },
   role: {

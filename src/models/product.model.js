@@ -17,7 +17,7 @@ const ProductsShema = new mongoose.Schema({
     type: String,
     required: [true, 'La descripcion es obligatoria'],
   },
-  picture: {
+  img: {
     type: String,
   },
   date_create: {
